@@ -12,7 +12,6 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { useSession } from 'next-auth/react';
-import { useNetwork } from 'wagmi';
 
 type ReplyingTo = {
   address: string;
@@ -43,8 +42,6 @@ const NewPostForm: React.FC<Props> = ({
   const [isPosting, setIsPosting] = useState(false);
   const [uploadError, setUploadError] = useState('');
 
-  const { chain } = useNetwork();
-
   const handlePostTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setPostText(e.target.value);
   };
@@ -68,53 +65,43 @@ const NewPostForm: React.FC<Props> = ({
     setUploadError('');
   
     try {
-      const imagesResponse = await fetch('/api/images/f');
-      let beforeImages = [];
-      if (imagesResponse.ok) {
-        const imagesData = await imagesResponse.json();
-        console.log("IMAGES DATA: ", imagesData)
-        beforeImages = imagesData.map(image => "https://gateway.lighthouse.storage/ipfs/" + image);
-      }
-      console.log("BEFORE IMAGES: ", beforeImages);
-  
       const currentImage = uploadedFiles[0] ? "https://gateway.lighthouse.storage/ipfs/" + uploadedFiles[0].cid : null;
   
       if (!currentImage) {
         throw new Error("No image to upload");
       }
   
-      let highSimilarity = false;
-      if (beforeImages.length > 0) {
-        const similarityResponse = await fetch('https://ai.luxora.space/upload', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            current: currentImage,
-            before: beforeImages,
-          }),
-        });
-  
-        if (!similarityResponse.ok) {
-          throw new Error("Failed to compare image");
-        }
-  
-        const similarityData = await similarityResponse.json();
-        console.log("SIMILARITY DATA: ", similarityData);
+      const AIRequest = await fetch('https://ai.luxora.space', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          image: currentImage,
+        }),
+      });
 
+      if (!AIRequest.ok) {
+        throw new Error("Failed to compare image");
+      }
+
+      const AIResponse = await AIRequest.json();
+      console.log("AI Response: ", AIResponse);
+
+      if (!AIResponse.success) {
+        const similarityData = AIResponse.embeddings;
+      
         const mostSimilarImage = similarityData.reduce((mostSimilar, current) => {
-          return (current[1] > mostSimilar[1]) ? current : mostSimilar;
-        }, ["", 0]);
-
-        if (mostSimilarImage[1] > 0.95) {
-          const similarityPercentage = (mostSimilarImage[1] * 100).toFixed(2);
-          throw new Error(`Image is ${similarityPercentage}% similar to an existing image`);
-        }
+          return (current.similarity > mostSimilar.similarity) ? current : mostSimilar;
+        }, { file: "", similarity: 0 });
+      
+        const similarityPercentage = (mostSimilarImage.similarity * 100).toFixed(4);
+        throw new Error(`Image is ${similarityPercentage}% similar to an existing image`);
+      } else {
+        console.log("Image is unique and can be posted.");
       }
   
       const postData = {
-        chain: chain?.name || 'Polygon zkEVM Testnet',
         content: postText,
         files: uploadedFiles,
         ...(replyingTo && { replyingTo }),
@@ -147,8 +134,7 @@ const NewPostForm: React.FC<Props> = ({
           body: JSON.stringify({
             image_cid: postData.files[0].cid,
             nft_name: nftName,
-            nft_description: postText,
-            chain: chain?.name || 'Polygon zkEVM Testnet'
+            nft_description: postText
           }),
         });
   
@@ -164,7 +150,6 @@ const NewPostForm: React.FC<Props> = ({
             },
             body: JSON.stringify({
               cid: postResponse.postCreationData.cid,
-              blockchain: chain?.name || 'Polygon zkEVM Testnet',
               hash: mintResponse.receipt.hash
             }),
           });
