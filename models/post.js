@@ -35,13 +35,7 @@ const PostSchema = new Schema({
     type: String,
     required: [true, 'Blockchain is required'],
     enum: [
-      'Polygon zkEVM Testnet',
-      'Arbitrum Goerli',
-      'Scroll Sepolia',
-      'Alfajores',
-      'Base Sepolia',
-      'Mantle Testnet',
-      'OKX X1'
+      'Polygon zkEVM Testnet'
     ],
     immutable: true,
   },
