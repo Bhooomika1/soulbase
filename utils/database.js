@@ -12,7 +12,7 @@ export const connectToDB = async () => {
 
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: 'Lens',
+      dbName: 'SoulBase',
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
