@@ -27,61 +27,25 @@ import {
 import {
   okxWallet
 } from '@rainbow-me/rainbowkit/wallets';
-import {
-  polygonZkEvmTestnet,
-  arbitrumGoerli,
-  scrollSepolia,
-  celoAlfajores,
-  mantleTestnet,
-  baseSepolia,
-  sepolia
-} from 'wagmi/chains';
-import { configureChains, createConfig, WagmiConfig, Chain } from 'wagmi';
+import { polygonZkEvmTestnet } from 'wagmi/chains';
+import { configureChains, createConfig, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
-export const x1 = {
-  id: 195,
-  name: 'OKX X1',
-  network: 'X1 Testnet',
-  nativeCurrency: {
-    decimals: 18,
-    name: 'OKB',
-    symbol: 'OKB',
-  },
-  rpcUrls: {
-    public: { http: ['https://testrpc.x1.tech'] },
-    default: { http: ['https://testrpc.x1.tech'] },
-  },
-  blockExplorers: {
-    default: { name: 'Block Explorer', url: 'https://www.oklink.com/x1-test' },
-  },
-  contracts: {},
-} as const satisfies Chain;
-
 const { chains, publicClient, webSocketPublicClient } = configureChains(
-  [
-    // polygonZkEvmTestnet,
-    // arbitrumGoerli,
-    // scrollSepolia,
-    // celoAlfajores,
-    // baseSepolia,
-    // mantleTestnet,
-    // x1,
-    sepolia
-  ],
+  [polygonZkEvmTestnet],
   [publicProvider()]
 );
 
 const projectId = '7d4991410483a2f943cd0f3e9bcf3c0d';
 
 const { wallets } = getDefaultWallets({
-  appName: 'luxora',
+  appName: 'soulbase',
   projectId,
   chains,
 });
 
 const demoAppInfo = {
-  appName: 'luxora',
+  appName: 'soulbase',
 };
 
 const connectors = connectorsForWallets([

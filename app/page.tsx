@@ -22,7 +22,6 @@ import { cn } from "@/lib/utils"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import ReactMarkdown from 'react-markdown'
 import NewPostForm from '@/components/NewPostForm'
-import { useNetwork } from 'wagmi';
 import { useSession } from 'next-auth/react';
 
 export default function Home() {
@@ -35,19 +34,11 @@ export default function Home() {
   const [posts, setPosts] = useState<any>([]);
   const [loadingPosts, setLoadingPosts] = useState(true);
 
-  const { chain } = useNetwork();
   const { data: session } = (useSession() || {}) as any;
 
   const currentUserAddress = session?.user?.address;
   const currentUser = users.find(user => user.address === currentUserAddress);
   const userPosts = posts.filter(post => post.creator.address === currentUserAddress);
-
-  console.log('Component render, Chain:', chain);
-  useEffect(() => {
-    if (chain) {
-      console.log('Current Chain:', chain);
-    }
-  }, [chain]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -176,14 +167,8 @@ export default function Home() {
                         <div className="ml-4">
                           <h3 className="mb-1 font-medium leading-none">{post.creator.username}</h3>
                           <p className="text-xs text-muted-foreground">{post.creator.name}</p>
-                          {/* <p className="text-xs text-muted-foreground">Minted on {post.blockchain}</p> */}
                         </div>
                       </div>
-                      {/* <h3 className="text-md mb-2 text-purple-500 font-bold">Minted on {post.blockchain}</h3> */}
-                      <h3 className="text-md mb-2 font-bold">
-                        <span className="text-white">Minted on:</span>
-                        <span className="text-purple-500"> {post.blockchain}</span>
-                      </h3>
                       <div>
                         <img
                           className="max-w-full sm:max-w-[500px] rounded-2xl h-auto object-cover transition-all hover:scale-105"

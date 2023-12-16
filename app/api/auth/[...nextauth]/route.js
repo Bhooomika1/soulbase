@@ -50,7 +50,6 @@ export const authOptions = {
             username: siwe.username,
             name: siwe.name,
             pfp: siwe.pfp,
-            isVerified: siwe.isVerified
           };
         } catch (e) {
           return null;
@@ -84,13 +83,11 @@ export const authOptions = {
         const username = user.username;
         const name = user.name;
         const profilePicture = user.pfp;
-        const isVerified = user.isVerified;
 
         console.log("address: ", address);
         console.log("username: ", username);
         console.log("name: ", name);
         console.log("profilePicture: ", profilePicture);
-        console.log("isVerified: ", isVerified);
 
         const userExists = await User.findOne({ address });
 
@@ -104,7 +101,6 @@ export const authOptions = {
             name,
             profilePicture,
             timestamp: new Date(),
-            isVerified
           });
         }
         return true;

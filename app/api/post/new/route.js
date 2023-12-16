@@ -25,7 +25,7 @@ export const POST = async (req) => {
   }
 
   const { postData } = await req.json();
-  const { content, files, replyingTo, chain } = postData;
+  const { content, files, replyingTo } = postData;
   console.log('Post Data:', postData);
 
   if (!postData) {
@@ -79,7 +79,6 @@ export const POST = async (req) => {
       let postCreationData = {
         creator: session.user.id,
         cid: result.data.Hash,
-        blockchain: chain
       };
 
       if (pinData.replyingTo) {
