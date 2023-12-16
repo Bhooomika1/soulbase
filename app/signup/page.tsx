@@ -49,7 +49,7 @@ const SignupPage: FC = () => {
         name: name,
         username: username,
         pfp: uploadedFiles[0].cid,
-        statement: 'Sign up to luxora',
+        statement: 'Sign up to SoulBase',
         uri: window.location.origin,
         version: '1',
         chainId: chain?.id,
@@ -69,17 +69,14 @@ const SignupPage: FC = () => {
       console.log(error);
     }
   };
-
   const handleFileUpload = (file: UploadedFile) => {
     setUploadedFiles([...uploadedFiles, file]);
   };
-
   const handleRemoveFile = (cid: string) => {
     setUploadedFiles((prevFiles) =>
       prevFiles.filter((file) => file.cid !== cid)
     );
   };
-
   const isFormValid = () => {
     return (
       name.trim() !== '' &&
@@ -87,14 +84,13 @@ const SignupPage: FC = () => {
       uploadedFiles.length > 0
     );
   };
-
   return (
     <div className="flex justify-center items-center h-screen" style={{ marginTop: '-5%' }}>
       <Card className="w-96">
         <CardHeader className="space-y-1">
           <CardTitle className="text-2xl">Sign Up</CardTitle>
           <CardDescription>
-            to luxora
+            to SoulBase
           </CardDescription>
         </CardHeader>
         <CardContent> 

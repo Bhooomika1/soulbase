@@ -107,7 +107,7 @@ function Nav() {
       const message = new ExtendedSiweMessage({
         domain: window.location.host,
         address: address,
-        statement: 'Sign in to luxora',
+        statement: 'Sign in to SoulBase',
         uri: window.location.origin,
         version: '1',
         chainId: chain?.id,
@@ -126,12 +126,10 @@ function Nav() {
       console.log(error);
     }
   }, [address, router, chain?.id, signMessageAsync]);
-
   const handleSignOut = async () => {
     disconnect();
     await signOut({ redirect: false, callbackUrl: '/' });
   };
-
   return (
     <nav className='
     border-b flex
@@ -144,7 +142,7 @@ function Nav() {
       >
         <Link href="/" className='mr-5 flex items-center'>
           <Droplets className="opacity-85" size={19} />
-          <p className={`ml-2 mr-4 text-lg font-semibold`}>luxora</p>
+          <p className={`ml-2 mr-4 text-lg font-semibold`}>SoulBase</p>
         </Link>
         <Link href="/" className={`mr-5 text-sm ${pathname !== '/' && 'opacity-50'}`}>
           <p>Home</p>
