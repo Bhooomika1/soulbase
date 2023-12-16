@@ -31,10 +31,6 @@ const UserSchema = new Schema({
     type: Date,
     default: Date.now,
     immutable: true,
-  },
-  isVerified: {
-    type: Boolean,
-    required: [true, 'Is Verified is required']
   }
 });
 

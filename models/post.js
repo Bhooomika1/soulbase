@@ -31,17 +31,9 @@ const PostSchema = new Schema({
     immutable: true,
   },
   replyingTo: [ReplyingToSchema],
-  blockchain: {
-    type: String,
-    required: [true, 'Blockchain is required'],
-    enum: [
-      'Polygon zkEVM Testnet'
-    ],
-    immutable: true,
-  },
   transactionUrl: {
-    type: String, // Define as a string
-    required: false, // Make it optional
+    type: String,
+    required: false,
   },
 });
 
