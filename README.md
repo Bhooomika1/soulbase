@@ -35,7 +35,7 @@ The main motive of S.H.I.E.L.D is to make an environment which helps the user an
 
 | Home Page | Our Features | Live Incident Tracker |
 | --- | --- | --- |
-| ![home](imgs/home.png) | ![options](imgs/options.png) | ![livereport](imgs/livereport.png) |
+| ![home](image 1.jpg) | ![options](imgs/options.png) | ![livereport](imgs/livereport.png) |
 
 | NGOs Mapping | NGOs Info | Register Incident |
 | --- | --- | --- |
