@@ -29,7 +29,7 @@ Soulbase prioritizes protecting creator rights and originality, ensuring their w
 
 ### 🏗️ Our Project
 
-The main motive of S.H.I.E.L.D is to make an environment which helps the user and also make it aware about the situations and also about how to deal with that.
+The main motive of SoulBase is to create a platform to help creators achieve content ownership and avoid spam.
 
 ## Snapshots
 
