@@ -33,21 +33,18 @@ The main motive of SoulBase is to create a platform to help creators achieve con
 
 ## Snapshots
 
-| Home Page | Our Features | Live Incident Tracker |
+| Signup Page | Home Page | Authenticate |
 | --- | --- | --- |
-| ![home](imgs/image 1.jpg) | ![options](imgs/options.png) | ![livereport](imgs/livereport.png) |
+| ![signup](imgs/image%201.jpg) | ![home](imgs/image%202.jpg) | ![auth](imgs/image%203.jpg) |
 
-| NGOs Mapping | NGOs Info | Register Incident |
+| Wallet connect | Verify | Multi wallet |
 | --- | --- | --- |
-| ![ngoregister](imgs/ngoregister.png) | ![ngomarker](imgs/ngomarker.png) | ![report](imgs/report.png) |
+| ![wallet](imgs/image%204.jpg) | ![verify](imgs/image%205.jpg) | ![multi](imgs/image%206.jpg) |
 
-| Login | Live Notifications | Donations |
+| Aadhaar feature | Post | AI detection |
 | --- | --- | --- |
-| ![login](imgs/login.png) | ![MSG](imgs/MSG.jpeg) | ![stripe](imgs/stripe.png) |
+| ![aadhaar](imgs/image%207.jpg) | ![post](imgs/image%208.jpg) | ![AI](imgs/image%209.jpg) |
 
-| Chatbot | Its Features | Community Page |
-| --- | --- | --- |
-| ![chatbot2](imgs/chatbot2.png) | ![chatbot4](imgs/chatbot4.png) | ![communitypage](imgs/communitypage.png) |
 
 ## Instructions on running project locally:
 
